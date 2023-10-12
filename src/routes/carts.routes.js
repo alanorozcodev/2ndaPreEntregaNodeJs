@@ -36,13 +36,25 @@ router.post("/", async (req, res) => {
 });
 
 //Borrar los carritos por Id
-router.delete("/:cartId", async (req,res) =>{
+router.delete("/:cid", async (req,res) =>{
     try {
-        const productId = req.params.productId;
-        const result = await productsService.deleteProduct(productId);
+        const cartId = req.params.cid;
+        const result = await cartsService.deleteCart(cartId);
         res.json({status: "success", data:result});
     } catch (error) {
         res.json({status: "error", message:error.message});
+    }
+});
+
+// Actualizar producto en carrito
+cartsRouter.post("/:cid/product/:pid", async(req,res)=>{
+    try {
+        const {cid:cartId, pid:productId} = req.params;
+        const cart = await cartsService.getCartById(cartId);
+        const result = await cartsService.addProductInCart(cartId, productId);
+        res.json({status:"success", result});
+    } catch (error) {
+        res.json({error:error.message});
     }
 });
 
