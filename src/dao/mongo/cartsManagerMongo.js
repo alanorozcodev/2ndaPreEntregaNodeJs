@@ -39,7 +39,7 @@ export class CartsManagerMongo{
     };
 
     //Agregar un producto a un carrito
-    async addProduct(cartId, productId){
+    async addProductInCart(cartId, productId){
         try {
             const cart = await this.getCartById(cartId);
             const productExist = cart.products.find( item => item.productId._id == productId);

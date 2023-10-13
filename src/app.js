@@ -30,6 +30,12 @@ app.engine('.hbs', engine({extname: '.hbs'}));
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname,"/views"));
 
+//boostrap
+ // Bootstrap
+app.use(express.static('node_modules/bootstrap/dist'));
+app.use('/css', express.static('node_modules/bootstrap/dist/css'));
+app.use('/js', express.static('node_modules/bootstrap/dist/js'));
+
 //routes
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);

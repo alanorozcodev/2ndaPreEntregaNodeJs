@@ -62,7 +62,17 @@ export class ProductsManagerMongo{
             return result;
         } catch (error) {
             console.log("deleteProduct",error.message);
-            throw   new Error("No se pudo eliminar el producto");
+            throw new Error("No se pudo eliminar el producto");
+        }
+    };
+    // Obtener Productos con Paginate
+    async getProductsPaginate(query, options){
+        try {
+            const result = await this.model.paginate(query, options);
+            return result;
+        } catch (error) {
+            console.log("getProducts: ", error.message);
+            throw new Error("Se produjo un error al mostrar los producto");
         }
     };
 };
